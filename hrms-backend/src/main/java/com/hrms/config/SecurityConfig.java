@@ -24,7 +24,7 @@ public class SecurityConfig {
     private final JwtGenerator jwtGenerator;
 
     @Autowired
-    public SecurityConfig(CustomUserDetailsService userDetailsService,
+    public SecurityConfig(@Lazy CustomUserDetailsService userDetailsService,
             JwtAuthEntryPoint authEntryPoint,
             @Lazy JwtGenerator jwtGenerator) {
         this.userDetailsService = userDetailsService;
