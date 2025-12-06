@@ -30,6 +30,8 @@ spring.datasource.username=<render-username>
 spring.datasource.password=<render-password>
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+
 ---
 
 
