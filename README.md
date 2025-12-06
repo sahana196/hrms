@@ -26,6 +26,7 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 
 application-prod.properties (for Render PostgreSQL)
+
 spring.datasource.url=jdbc:postgresql://<render-host>:5432/<db-name>
 spring.datasource.username=<render-username>
 spring.datasource.password=<render-password>
