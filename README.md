@@ -17,22 +17,6 @@ The project includes employee management features, REST APIs, database integrati
 - **Local development:** MySQL
 - **Cloud deployment (Render):** PostgreSQL (via Render managed DB)
 
-application.properties (for local MySQL)
-
-spring.datasource.url=jdbc:mysql://localhost:3306/hrms
-spring.datasource.username=root
-spring.datasource.password=your_local_password
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
-
-application-prod.properties (for Render PostgreSQL)
-
-spring.datasource.url=jdbc:postgresql://<render-host>:5432/<db-name>
-spring.datasource.username=<render-username>
-spring.datasource.password=<render-password>
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-
 
 ---
 
