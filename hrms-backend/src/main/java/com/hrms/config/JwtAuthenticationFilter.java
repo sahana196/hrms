@@ -13,14 +13,20 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import org.springframework.context.annotation.Lazy;
 import java.io.IOException;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+    private final JwtGenerator tokenGenerator;
+    private final CustomUserDetailsService customUserDetailsService;
+
     @Autowired
-    private JwtGenerator tokenGenerator;
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    public JwtAuthenticationFilter(@Lazy JwtGenerator tokenGenerator,
+            @Lazy CustomUserDetailsService customUserDetailsService) {
+        this.tokenGenerator = tokenGenerator;
+        this.customUserDetailsService = customUserDetailsService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
