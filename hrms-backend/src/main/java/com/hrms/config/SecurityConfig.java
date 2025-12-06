@@ -4,6 +4,7 @@ import com.hrms.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,11 +21,15 @@ public class SecurityConfig {
 
     private final JwtAuthEntryPoint authEntryPoint;
     private final CustomUserDetailsService userDetailsService;
+    private final JwtGenerator jwtGenerator;
 
     @Autowired
-    public SecurityConfig(CustomUserDetailsService userDetailsService, JwtAuthEntryPoint authEntryPoint) {
+    public SecurityConfig(CustomUserDetailsService userDetailsService,
+            JwtAuthEntryPoint authEntryPoint,
+            @Lazy JwtGenerator jwtGenerator) {
         this.userDetailsService = userDetailsService;
         this.authEntryPoint = authEntryPoint;
+        this.jwtGenerator = jwtGenerator;
     }
 
     @Bean
@@ -69,6 +74,6 @@ public class SecurityConfig {
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter();
+        return new JwtAuthenticationFilter(jwtGenerator, userDetailsService);
     }
 }
