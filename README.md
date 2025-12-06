@@ -13,11 +13,10 @@ The project includes employee management features, REST APIs, database integrati
 - API testing using Postman  
 - Frontend built with React + Vite  
 - Version control via Git & GitHub  
+
 ### Database
 - **Local development:** MySQL
 - **Cloud deployment (Render):** PostgreSQL (via Render managed DB)
-
-
 
 
 ---
