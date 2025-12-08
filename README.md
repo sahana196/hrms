@@ -100,4 +100,5 @@ APIs can be tested using Postman with standard CRUD routes:
 ![Audit Logs](<Images/Audit Logs.png>)
 
 ### Deployment
-![Render Deployment](<Images/render-frontend.png>)
+![Render Backend Deployment](<Images/render-backend.png>)
+![Render Frontend Deployment](<Images/render-frontend.png>)
