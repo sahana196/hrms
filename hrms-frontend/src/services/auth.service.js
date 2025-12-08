@@ -1,3 +1,4 @@
+// src/services/auth.service.js
 import api from './api';
 
 const login = async (username, password) => {
@@ -13,12 +14,11 @@ const logout = () => {
 };
 
 const register = (username, password, role) => {
+    // Final URL = http://localhost:8080/api/auth/register
     return api.post('/auth/register', { username, password, role });
-}
+};
 
 const getCurrentUser = () => {
-    // Decode token or user stored user info
-    // For now simple check
     return localStorage.getItem('token');
 };
 
