@@ -1,0 +1,153 @@
+/* dashboard.css */
+
+.dash-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #2c2c88, #161633 60%, #090914);
+  color: #f9f9ff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Top bar */
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.dash-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.dash-logo-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.dash-logo-text {
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.dash-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dash-user-label {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.btn-logout {
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #f97373;
+  color: #fff;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(249, 115, 115, 0.35);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+}
+
+.btn-logout:hover {
+  background: #ef4444;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(248, 113, 113, 0.55);
+}
+
+/* Main content */
+.dash-main {
+  max-width: 1100px;
+  margin: 2.5rem auto 3rem;
+  padding: 0 1.5rem 2rem;
+}
+
+.dash-title {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.dash-subtitle {
+  font-size: 0.98rem;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+/* Cards grid */
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+.dash-card {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 1.2rem;
+  padding: 1.3rem 1.3rem 1.1rem;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.dash-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.9);
+  border-color: rgba(129, 140, 248, 0.95);
+  background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.28), rgba(15, 23, 42, 0.98));
+}
+
+.dash-card-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.dash-card-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.35rem;
+}
+
+.dash-card-text {
+  font-size: 0.9rem;
+  opacity: 0.82;
+  margin-bottom: 0.9rem;
+}
+
+.dash-card-link {
+  font-size: 0.86rem;
+  color: #a5b4fc;
+  font-weight: 500;
+}
+
+/* Small screens */
+@media (max-width: 640px) {
+  .dash-header {
+    padding: 0.85rem 1.2rem;
+  }
+
+  .dash-main {
+    margin-top: 1.6rem;
+    padding: 0 1rem 2rem;
+  }
+
+  .dash-title {
+    font-size: 1.7rem;
+  }
+}
