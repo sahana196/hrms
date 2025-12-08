@@ -41,50 +41,63 @@ The project includes employee management features, REST APIs, database integrati
 
 ---
 
----
-
 ## 🔹 How to Run Locally
 
 ### Backend
 ```bash
 cd hrms-backend
 mvn spring-boot:run
+```
 
 Backend will start at:
+`http://localhost:8080`
 
-http://localhost:8080
-
-Frontend
+### Frontend
+```bash
 cd hrms-frontend
 npm install
 npm run dev
+```
 
 Frontend will run at:
+`http://localhost:5173`
 
-http://localhost:5173
-
-API Testing (Postman)
+### API Testing (Postman)
 
 APIs can be tested using Postman with standard CRUD routes:
 
-GET /employees
+- `GET /employees`
+- `POST /employees`
+- `PUT /employees/{id}`
+- `DELETE /employees/{id}`
 
-POST /employees
+---
 
-PUT /employees/{id}
+## 🔹 Future Enhancements
 
-DELETE /employees/{id}
-🔹 Future Enhancements
+- Authentication (JWT)
+- Role-based access
+- PostgreSQL integration
+- Dockerization
+- CI/CD pipeline
 
-Authentication (JWT)
+---
 
-Role-based access
+## 🔹 Project Output
 
-PostgreSQL integration
+### Authentication
+![Login Page](<Images/login page.png>)
+![Register Page](<Images/register page.png>)
 
-Dockerization
+### Dashboard
+![Dashboard](<Images/Dashboard.png>)
 
-CI/CD pipeline
+### Management Modules
+![Employee Management](<Images/Employee Dashboard.png>)
+![Employees List](<Images/employees.png>)
+![Attendance Dashboard](<Images/Attendance dashboard.png>)
+![Leave Dashboard](<Images/Leave dashboard.png>)
+![Audit Logs](<Images/Audit Logs.png>)
 
-OUTPUT OF MY PROJECT:
-[text](README.md) ![text](<postman-output/Attendance dashboard.png>) ![text](<postman-output/Audit Logs.png>) ![text](postman-output/Dashboard.png) ![text](<postman-output/Employee Dashboard.png>) ![text](postman-output/employees.png) ![text](<postman-output/Leave dashboard.png>) ![text](<postman-output/login page.png>) ![text](postman-output/login.png) ![text](<postman-output/register page.png>) ![text](postman-output/register.png)
+### Deployment
+![Render Deployment](<Images/render-frontend.png>)
