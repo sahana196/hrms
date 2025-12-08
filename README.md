@@ -85,3 +85,6 @@ PostgreSQL integration
 Dockerization
 
 CI/CD pipeline
+
+OUTPUT OF MY PROJECT:
+[text](README.md) ![text](<postman-output/Attendance dashboard.png>) ![text](<postman-output/Audit Logs.png>) ![text](postman-output/Dashboard.png) ![text](<postman-output/Employee Dashboard.png>) ![text](postman-output/employees.png) ![text](<postman-output/Leave dashboard.png>) ![text](<postman-output/login page.png>) ![text](postman-output/login.png) ![text](<postman-output/register page.png>) ![text](postman-output/register.png)
