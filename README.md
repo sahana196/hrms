@@ -101,4 +101,4 @@ APIs can be tested using Postman with standard CRUD routes:
 ![Render Frontend Deployment](<Images/render-frontend.png>)
 
 ### Database
-![Database](<Images/Database.png>)
+![Database](<Images/database.png>)
