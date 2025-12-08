@@ -1,8 +1,17 @@
-// src/pages/Dashboard.jsx  (or whatever your file is called)
+// src/components/Dashboard.jsx
 import React from "react";
+import { useNavigate, Link } from "react-router-dom";
+import authService from "../services/auth.service";
 import "./dashboard.css";
 
-const Dashboard = ({ onLogout }) => {
+const Dashboard = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        authService.logout(); // remove token
+        navigate("/login");
+    };
+
     return (
         <div className="dash-page">
             {/* Top bar */}
@@ -11,9 +20,10 @@ const Dashboard = ({ onLogout }) => {
                     <span className="dash-logo-icon">H</span>
                     <span className="dash-logo-text">HRMS</span>
                 </div>
+
                 <div className="dash-user">
                     <span className="dash-user-label">Welcome, User</span>
-                    <button className="btn-logout" onClick={onLogout}>
+                    <button className="btn-logout" onClick={handleLogout}>
                         Logout
                     </button>
                 </div>
@@ -23,61 +33,29 @@ const Dashboard = ({ onLogout }) => {
             <main className="dash-main">
                 <h1 className="dash-title">HRMS Dashboard</h1>
                 <p className="dash-subtitle">
-                    Manage employees, leaves, attendance and audit logs in one place.
+                    Quick access to employees, leaves, attendance and audit logs.
                 </p>
 
                 <div className="dash-grid">
-                    {/* Employees */}
-                    <section
-                        className="dash-card"
-                        onClick={() => (window.location.href = "/employees")}
-                    >
-                        <div className="dash-card-icon"></div>
-                        <h2 className="dash-card-title">Employees</h2>
-                        <p className="dash-card-text">
-                            Manage employee records, view profiles, and update details.
-                        </p>
-                        <span className="dash-card-link">Go to Employees →</span>
-                    </section>
+                    <Link to="/employees" className="dash-card">
+                        <h2>Employees</h2>
+                        <p>Manage employee records, view profiles, and update details.</p>
+                    </Link>
 
-                    {/* Leaves */}
-                    <section
-                        className="dash-card"
-                        onClick={() => (window.location.href = "/leaves")}
-                    >
-                        <div className="dash-card-icon"></div>
-                        <h2 className="dash-card-title">Leaves</h2>
-                        <p className="dash-card-text">
-                            View leave requests, approve time off, and check balances.
-                        </p>
-                        <span className="dash-card-link">Go to Leaves →</span>
-                    </section>
+                    <Link to="/leaves" className="dash-card">
+                        <h2>Leaves</h2>
+                        <p>View leave requests, approve time off, and check balances.</p>
+                    </Link>
 
-                    {/* Attendance */}
-                    <section
-                        className="dash-card"
-                        onClick={() => (window.location.href = "/attendance")}
-                    >
-                        <div className="dash-card-icon"></div>
-                        <h2 className="dash-card-title">Attendance</h2>
-                        <p className="dash-card-text">
-                            Check-in / check-out, view daily logs and work hours.
-                        </p>
-                        <span className="dash-card-link">Go to Attendance →</span>
-                    </section>
+                    <Link to="/attendance" className="dash-card">
+                        <h2>Attendance</h2>
+                        <p>Clock-in / Clock-out and view daily logs and work hours.</p>
+                    </Link>
 
-                    {/* Audit Logs */}
-                    <section
-                        className="dash-card"
-                        onClick={() => (window.location.href = "/audit-logs")}
-                    >
-                        <div className="dash-card-icon"></div>
-                        <h2 className="dash-card-title">Audit Logs</h2>
-                        <p className="dash-card-text">
-                            Monitor system activity, track changes and security events.
-                        </p>
-                        <span className="dash-card-link">Go to Audit Logs →</span>
-                    </section>
+                    <Link to="/audit" className="dash-card">
+                        <h2>Audit Logs</h2>
+                        <p>Monitor system activity, track changes and security events.</p>
+                    </Link>
                 </div>
             </main>
         </div>

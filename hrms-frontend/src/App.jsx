@@ -22,6 +22,7 @@ function App() {
         <Route path="/leaves" element={<LeaveList />} />
         <Route path="/audit" element={<AuditLogList />} />
         <Route path="/" element={<Navigate to="/login" />} />
+
       </Routes>
     </Router>
   );

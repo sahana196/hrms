@@ -1,8 +1,6 @@
 import api from './api';
 
-const getAllLogs = () => {
-    return api.get('/audit');
-};
+const getAllLogs = () => api.get("/audit");
 
 export default {
     getAllLogs

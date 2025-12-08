@@ -26,71 +26,66 @@ const Register = () => {
     };
 
     return (
-        <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white'
-        }}>
-            <h1 className="text-5xl font-bold mb-8">Join HRMS</h1>
+        <div className="auth-page">
+            <div className="auth-card">
+                <h1 className="auth-title">Join HRMS</h1>
+                <h2 className="auth-subtitle">Create Account</h2>
+                <p className="auth-text">
+                    Register to get started with HRMS.
+                </p>
 
-            <div className="w-full max-w-sm">
-                <h3 className="text-xl font-semibold text-center mb-6">Create Account</h3>
-                <form onSubmit={handleRegister} className="space-y-4">
-                    <div>
-                        <label className="block text-sm mb-2">Username</label>
+                {error && <div className="auth-error">{error}</div>}
+                {message && <div className="auth-error" style={{ color: '#4ade80', backgroundColor: 'rgba(74, 222, 128, 0.16)' }}>{message}</div>}
+
+                <form onSubmit={handleRegister} className="auth-form">
+                    <label className="auth-label">
+                        Username
                         <input
                             type="text"
+                            className="auth-input"
                             placeholder="Choose a username"
-                            className="w-full p-2 rounded bg-gray-800 border border-gray-600 focus:outline-none focus:border-blue-500"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
                         />
-                    </div>
-                    <div>
-                        <label className="block text-sm mb-2">Password</label>
+                    </label>
+
+                    <label className="auth-label">
+                        Password
                         <input
                             type="password"
+                            className="auth-input"
                             placeholder="Create a password"
-                            className="w-full p-2 rounded bg-gray-800 border border-gray-600 focus:outline-none focus:border-blue-500"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                    </div>
-                    <div>
-                        <label className="block text-sm mb-2">Role</label>
+                    </label>
+
+                    <label className="auth-label">
+                        Role
                         <select
                             value={role}
                             onChange={(e) => setRole(e.target.value)}
-                            className="w-full p-2 rounded bg-gray-800 border border-gray-600 focus:outline-none focus:border-blue-500 text-white"
+                            className="auth-input"
                         >
                             <option value="EMPLOYEE">Employee</option>
                             <option value="HR">HR</option>
                             <option value="ADMIN">Admin</option>
                         </select>
-                    </div>
+                    </label>
 
-                    {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
-                    {message && <p className="text-green-400 text-sm mt-2">{message}</p>}
-
-                    <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded transition mt-4">
+                    <button className="auth-button" type="submit">
                         Register Now
                     </button>
-
-                    <div className="text-center mt-4">
-                        <Link to="/login" className="text-sm text-white font-bold hover:text-gray-200">
-                            Already have an account? Sign In
-                        </Link>
-                    </div>
                 </form>
+
+                <p className="auth-footer">
+                    Already have an account?{" "}
+                    <Link to="/login" className="auth-link">
+                        Sign In
+                    </Link>
+                </p>
             </div>
         </div>
     );

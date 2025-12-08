@@ -38,4 +38,9 @@ body {
     .text-gradient {
         @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-pink to-neon-blue;
     }
+
+    .container {
+        margin-top: 40px;
+    }
+
 }

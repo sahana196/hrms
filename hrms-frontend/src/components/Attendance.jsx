@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import attendanceService from '../services/attendance.service';
+// src/components/Attendance.jsx
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import attendanceService from "../services/attendance.service";
 
 const Attendance = () => {
     const [history, setHistory] = useState([]);
-    const [message, setMessage] = useState('');
-    const [error, setError] = useState('');
+    const [message, setMessage] = useState("");
+    const [error, setError] = useState("");
 
     useEffect(() => {
         loadHistory();
@@ -21,75 +22,111 @@ const Attendance = () => {
     };
 
     const handleClockIn = async () => {
-        setMessage('');
-        setError('');
+        setMessage("");
+        setError("");
         try {
             await attendanceService.clockIn();
-            setMessage('Clocked In Successfully!');
+            setMessage("Clocked In Successfully!");
             loadHistory();
         } catch (err) {
-            setError(err.response?.data || 'Failed to clock in');
+            setError(err.response?.data || "Failed to clock in");
         }
     };
 
     const handleClockOut = async () => {
-        setMessage('');
-        setError('');
+        setMessage("");
+        setError("");
         try {
             await attendanceService.clockOut();
-            setMessage('Clocked Out Successfully!');
+            setMessage("Clocked Out Successfully!");
             loadHistory();
         } catch (err) {
-            setError(err.response?.data || 'Failed to clock out');
+            setError(err.response?.data || "Failed to clock out");
         }
     };
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Attendance</h2>
+        <div className="hrms-page">
+            <h1 style={{ marginBottom: "14px" }}>Attendance</h1>
 
-            <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-                <div className="flex space-x-4 mb-4">
-                    <button onClick={handleClockIn} className="bg-green-500 text-white px-6 py-3 rounded text-lg font-semibold hover:bg-green-600 transition">
+            {/* clock in/out panel */}
+            <div
+                style={{
+                    marginBottom: "18px",
+                    padding: "16px 18px",
+                    borderRadius: "14px",
+                    background: "rgba(15,23,42,0.9)",
+                    border: "1px solid rgba(148,163,184,0.5)",
+                }}
+            >
+                <div style={{ display: "flex", gap: "12px", marginBottom: "10px" }}>
+                    <button
+                        onClick={handleClockIn}
+                        className="auth-button"
+                        style={{ maxWidth: "160px" }}
+                    >
                         Clock In
                     </button>
-                    <button onClick={handleClockOut} className="bg-orange-500 text-white px-6 py-3 rounded text-lg font-semibold hover:bg-orange-600 transition">
+                    <button
+                        onClick={handleClockOut}
+                        className="auth-button"
+                        style={{
+                            maxWidth: "160px",
+                            background: "linear-gradient(135deg,#f97316,#fb923c)",
+                            boxShadow: "0 14px 30px rgba(248, 148, 80, 0.6)",
+                        }}
+                    >
                         Clock Out
                     </button>
                 </div>
-                {message && <p className="text-green-600 font-medium">{message}</p>}
-                {error && <p className="text-red-500 font-medium">{error}</p>}
+
+                {message && (
+                    <p style={{ color: "#4ade80", fontSize: "0.9rem" }}>{message}</p>
+                )}
+                {error && (
+                    <p style={{ color: "#fecaca", fontSize: "0.9rem" }}>{error}</p>
+                )}
             </div>
 
-            <h3 className="text-xl font-bold text-gray-700 mb-4">My Attendance History</h3>
-            <div className="bg-white shadow-md rounded overflow-x-auto">
-                <table className="min-w-full table-auto">
-                    <thead>
-                        <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th className="py-3 px-6 text-left">Date</th>
-                            <th className="py-3 px-6 text-left">Clock In</th>
-                            <th className="py-3 px-6 text-left">Clock Out</th>
+            {/* history table */}
+            <h3 style={{ marginBottom: "8px" }}>My Attendance History</h3>
+            <table className="hrms-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Clock In</th>
+                        <th>Clock Out</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {history.map((record) => (
+                        <tr key={record.id}>
+                            <td>{record.date}</td>
+                            <td>
+                                {record.clockInTime
+                                    ? new Date(record.clockInTime).toLocaleTimeString()
+                                    : "-"}
+                            </td>
+                            <td>
+                                {record.clockOutTime
+                                    ? new Date(record.clockOutTime).toLocaleTimeString()
+                                    : "-"}
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody className="text-gray-600 text-sm font-light">
-                        {history.map((record) => (
-                            <tr key={record.id} className="border-b border-gray-200 hover:bg-gray-100">
-                                <td className="py-3 px-6 text-left">{record.date}</td>
-                                <td className="py-3 px-6 text-left">{record.clockInTime ? new Date(record.clockInTime).toLocaleTimeString() : '-'}</td>
-                                <td className="py-3 px-6 text-left">{record.clockOutTime ? new Date(record.clockOutTime).toLocaleTimeString() : '-'}</td>
-                            </tr>
-                        ))}
-                        {history.length === 0 && (
-                            <tr>
-                                <td colSpan="3" className="py-3 px-6 text-center">No history found</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
-            </div>
-            <div className="mt-4">
-                <Link to="/dashboard" className="text-blue-600 hover:underline">Back to Dashboard</Link>
-            </div>
+                    ))}
+                    {history.length === 0 && (
+                        <tr>
+                            <td colSpan="3" style={{ textAlign: "center", padding: "10px" }}>
+                                No history found
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+
+            <Link to="/dashboard" className="hrms-back-link">
+                Back to Dashboard
+            </Link>
         </div>
     );
 };

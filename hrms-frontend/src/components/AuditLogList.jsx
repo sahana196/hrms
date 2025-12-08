@@ -1,69 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import auditService from '../services/audit.service';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import auditService from "../services/audit.service";
 
 const AuditLogList = () => {
     const [logs, setLogs] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+    const [error, setError] = useState("");
 
     useEffect(() => {
         loadLogs();
     }, []);
 
     const loadLogs = async () => {
+        setLoading(true);
+        setError("");
+
         try {
             const response = await auditService.getAllLogs();
-            // Sort client side if needed or rely on backend
-            const sortedLogs = response.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            const raw = Array.isArray(response?.data) ? response.data : [];
+
+            const sortedLogs = [...raw].sort(
+                (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+            );
+
             setLogs(sortedLogs);
-            setLoading(false);
         } catch (err) {
             console.error("Error loading logs", err);
-            setError("Failed to load audit logs. You might not have permission (Admin only).");
+            if (err.response?.status === 403) {
+                setError(
+                    "You are not authorized to view audit logs. This page is for Admin users only."
+                );
+            } else {
+                setError("Failed to load audit logs. Please try again later.");
+            }
+        } finally {
             setLoading(false);
         }
     };
 
-    if (loading) return <div className="text-center mt-10">Loading Logs...</div>;
+    if (loading) {
+        return (
+            <div className="audit-page">
+                <div className="audit-card">
+                    Loading logs...
+                </div>
+            </div>
+        );
+    }
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Audit Logs (Admin View)</h2>
+        <div className="audit-page">
+            <div className="audit-card">
+                <h2 className="audit-title">Audit Logs (Admin View)</h2>
 
-            {error && <div className="bg-red-100 text-red-700 p-4 rounded mb-4">{error}</div>}
+                {error && <div className="audit-error">{error}</div>}
 
-            <div className="bg-white shadow-md rounded overflow-x-auto">
-                <table className="min-w-full table-auto">
+                <table className="audit-table">
                     <thead>
-                        <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th className="py-3 px-6 text-left">Timestamp</th>
-                            <th className="py-3 px-6 text-left">User</th>
-                            <th className="py-3 px-6 text-left">Action</th>
-                            <th className="py-3 px-6 text-left">Details</th>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Details</th>
                         </tr>
                     </thead>
-                    <tbody className="text-gray-600 text-sm font-light">
+                    <tbody>
                         {logs.map((log) => (
-                            <tr key={log.id} className="border-b border-gray-200 hover:bg-gray-100">
-                                <td className="py-3 px-6 text-left whitespace-nowrap">
-                                    {new Date(log.timestamp).toLocaleString()}
+                            <tr
+                                key={log.id ?? `${log.timestamp}-${log.username}-${log.action}`}
+                            >
+                                <td>
+                                    {log.timestamp
+                                        ? new Date(log.timestamp).toLocaleString()
+                                        : "-"}
                                 </td>
-                                <td className="py-3 px-6 text-left font-medium">{log.username}</td>
-                                <td className="py-3 px-6 text-left">{log.action}</td>
-                                <td className="py-3 px-6 text-left">{log.details}</td>
+                                <td>{log.username || "-"}</td>
+                                <td>{log.action || "-"}</td>
+                                <td>{log.details || "-"}</td>
                             </tr>
                         ))}
-                        {logs.length === 0 && (
+
+                        {logs.length === 0 && !error && (
                             <tr>
-                                <td colSpan="4" className="py-3 px-6 text-center">No logs found</td>
+                                <td colSpan="4" style={{ textAlign: "center", padding: "12px" }}>
+                                    No logs found.
+                                </td>
                             </tr>
                         )}
                     </tbody>
                 </table>
-            </div>
-            <div className="mt-4">
-                <Link to="/dashboard" className="text-blue-600 hover:underline">Back to Dashboard</Link>
+
+                <Link to="/dashboard" className="audit-back-link">
+                    Back to Dashboard
+                </Link>
             </div>
         </div>
     );
