@@ -99,3 +99,6 @@ APIs can be tested using Postman with standard CRUD routes:
 ### Deployment
 ![Render Backend Deployment](<Images/render-backend.png>)
 ![Render Frontend Deployment](<Images/render-frontend.png>)
+
+### Database
+![Database](<Images/database.png>)

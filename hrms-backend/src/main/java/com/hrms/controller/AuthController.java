@@ -52,6 +52,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
+        System.out.println("REGISTER endpoint hit: " + registerDto.getUsername());
 
         // check if username already exists
         if (userRepository.existsByUsername(registerDto.getUsername())) {

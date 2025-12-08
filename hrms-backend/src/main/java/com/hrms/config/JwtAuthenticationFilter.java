@@ -27,44 +27,36 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request,
             HttpServletResponse response,
-            FilterChain filterChain)
-            throws ServletException, IOException {
+            FilterChain filterChain) throws ServletException, IOException {
 
-        // 1. Read Authorization header
-        String header = request.getHeader("Authorization");
-        String token = null;
-        String username = null;
+        String authHeader = request.getHeader("Authorization");
 
-        // 2. If header starts with "Bearer ", extract token
-        if (header != null && header.startsWith("Bearer ")) {
-            token = header.substring(7);
-            try {
-                username = jwtGenerator.getUsernameFromJWT(token);
-            } catch (Exception ex) {
-                // invalid token → just ignore, don't authenticate
-                username = null;
-            }
+        // If there's no Authorization header or it doesn't start with Bearer — skip
+        // filter.
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            filterChain.doFilter(request, response);
+            return;
         }
 
-        // 3. If we got a username and context has no auth yet, authenticate user
-        if (username != null &&
-                SecurityContextHolder.getContext().getAuthentication() == null) {
-
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
+        String token = authHeader.substring(7);
+        try {
             if (jwtGenerator.validateToken(token)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
+                String username = jwtGenerator.getUsernameFromJWT(token);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-                authToken.setDetails(
-                        new WebAuthenticationDetailsSource().buildDetails(request));
-
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+                // build authentication
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null,
+                        userDetails.getAuthorities());
+                auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(auth);
             }
+        } catch (Exception ex) {
+            // don't call response.sendError here — let AuthenticationEntryPoint handle
+            // unauthorized responses.
+            // Optionally log for debugging:
+            SecurityContextHolder.clearContext();
         }
 
-        // 4. IMPORTANT: always continue filter chain,
-        // even if there is no token or token is invalid.
         filterChain.doFilter(request, response);
     }
 }
