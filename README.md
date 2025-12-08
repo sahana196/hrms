@@ -91,8 +91,6 @@ APIs can be tested using Postman with standard CRUD routes:
 
 ### Dashboard
 ![Dashboard](<Images/Dashboard.png>)
-
-### Management Modules
 ![Employee Management](<Images/Employee Dashboard.png>)
 ![Attendance Dashboard](<Images/Attendance dashboard.png>)
 ![Leave Dashboard](<Images/Leave dashboard.png>)
