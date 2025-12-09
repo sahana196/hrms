@@ -1,89 +1,89 @@
 # Human Resource Management System (HRMS)
 
-A full-stack HRMS application built using **Spring Boot** (backend) and **React + Vite** (frontend).  
-The project includes employee management features, REST APIs, database integration, and cloud deployment.
+A comprehensive full-stack Human Resource Management System built to streamline employee management, attendance tracking, and administrative tasks.
 
 ---
 
-## 🔹 Features
-- Employee CRUD operations  
-- RESTful API design  
-- Service–Repository architecture  
-- Database integration (MySQL locally, PostgreSQL on Render)  
-- API testing using Postman  
-- Frontend built with React + Vite  
-- Version control via Git & GitHub  
-
-### Database
-- **Local development:** MySQL
-- **Cloud deployment (Render):** PostgreSQL (via Render managed DB)
-
-
----
-
-
-## 🔹 Tech Stack
-### Backend
-- Java  
-- Spring Boot  
-- Spring Data JPA  
-- Maven  
-
-### Frontend
-- React  
-- Vite  
-- HTML/CSS/JS  
-
-### Tools
-- Postman  
-- Git & GitHub  
-- Render (for deployment)  
-
----
-
-## 🔹 How to Run Locally
+## � Tech Stack
 
 ### Backend
-```bash
-cd hrms-backend
-mvn spring-boot:run
-```
-
-Backend will start at:
-`http://localhost:8080`
+*   **Framework:** Spring Boot 3.2
+*   **Language:** Java 17
+*   **Database:** MySQL (Local), PostgreSQL (Production/Render)
+*   **ORM:** Spring Data JPA (Hibernate)
+*   **Security:** Spring Security, JWT (JSON Web Tokens)
+*   **Utilities:** Lombok, Java Mail Sender
+*   **Build Tool:** Maven
 
 ### Frontend
+*   **Framework:** React
+*   **Build Tool:** Vite
+*   **Styling:** Tailwind CSS
+*   **Routing:** React Router DOM
+*   **HTTP Client:** Axios
+
+### Tools & DevOps
+*   **API Testing:** Postman
+*   **Version Control:** Git & GitHub
+*   **Deployment:** Render
+*   **IDE:** VS Code / IntelliJ IDEA
+
+---
+
+## ✨ Features
+
+*   **Authentication & Authorization:** Secure Login and Registration with JWT and Role-based access control.
+*   **Employee Management:** Complete CRUD capabilities for managing employee records.
+*   **Dashboard:** Interactive admin dashboard with overview statistics.
+*   **Audit Logs:** Track system activities and changes.
+*   **Reports:** Generate and download PDF reports.
+*   **Responsive Design:** Modern UI built with Tailwind CSS.
+
+---
+
+## 🛠️ Installation & Setup
+
+### Prerequisites
+*   Java 17 or higher
+*   Node.js & npm
+*   MySQL Server
+
+### 1. Clone the Repository
 ```bash
-cd hrms-frontend
-npm install
-npm run dev
+git clone https://github.com/sahana196/HumanResourceMgmtSystem.git
+cd HumanResourceMgmtSystem
 ```
 
-Frontend will run at:
-`http://localhost:5173`
+### 2. Backend Setup
+1.  Navigate to the backend directory:
+    ```bash
+    cd hrms-backend
+    ```
+2.  Configure your database settings in `src/main/resources/application.properties`.
+3.  Run the application:
+    ```bash
+    mvn spring-boot:run
+    ```
+    The server will start at `http://localhost:8080`.
 
-### API Testing (Postman)
-
-APIs can be tested using Postman with standard CRUD routes:
-
-- `GET /employees`
-- `POST /employees`
-- `PUT /employees/{id}`
-- `DELETE /employees/{id}`
+### 3. Frontend Setup
+1.  Navigate to the frontend directory:
+    ```bash
+    cd hrms-frontend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Start the development server:
+    ```bash
+    npm run dev
+    ```
+    The application will run at `http://localhost:5173`.
 
 ---
 
-## 🔹 Future Enhancements
-
-- Authentication (JWT)
-- Role-based access
-- PostgreSQL integration
-- Dockerization
-- CI/CD pipeline
-
----
-
-## 🔹 Project Output
+## � Project Screenshots
 
 ### Authentication
 ![Login Page](<Images/login page.png>)
@@ -91,6 +91,8 @@ APIs can be tested using Postman with standard CRUD routes:
 
 ### Dashboard
 ![Dashboard](<Images/Dashboard.png>)
+
+### Modules
 ![Employee Management](<Images/Employee Dashboard.png>)
 ![Attendance Dashboard](<Images/Attendance dashboard.png>)
 ![Leave Dashboard](<Images/Leave dashboard.png>)
@@ -99,6 +101,3 @@ APIs can be tested using Postman with standard CRUD routes:
 ### Deployment
 ![Render Backend Deployment](<Images/render-backend.png>)
 ![Render Frontend Deployment](<Images/render-frontend.png>)
-
-### Database
-![Database](<Images/database.png>)
