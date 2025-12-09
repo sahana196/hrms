@@ -83,6 +83,39 @@ cd HumanResourceMgmtSystem
 
 ---
 
+## 📂 Project Structure
+
+```bash
+HumanResourceMgmtSystem
+├── hrms-backend
+│   ├── src/main/java/com/hrms
+│   │   ├── config          # Security & App Config
+│   │   ├── controller      # REST Controllers
+│   │   ├── dto             # Data Transfer Objects
+│   │   ├── model           # JPA Entities
+│   │   ├── repository      # Data Access Layer
+│   │   └── service         # Business Logic
+│   └── src/main/resources
+│       └── application.properties
+│
+├── hrms-frontend
+│   ├── src/
+│   │   ├── assets          # Static assets
+│   │   ├── components      # Reusable UI components
+│   │   ├── context         # React Context (Auth)
+│   │   ├── pages           # Page components
+│   │   ├── services        # API calls (Axios)
+│   │   ├── App.jsx         # Main App Component
+│   │   └── main.jsx        # Entry Point
+│   ├── index.html
+│   ├── package.json
+│   └── vite.config.js
+│
+└── README.md
+```
+
+---
+
 ## � Project Screenshots
 
 ### Authentication
